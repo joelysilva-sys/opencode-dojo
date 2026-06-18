@@ -54,21 +54,36 @@ O moderador rodará o comando `/audit` para validar seus agentes.
 
 Cada agente deve seguir o formato:
 
-```markdown
----
-description: "O que o agente faz"
-mode: subagent (ou primary para orchestrator)
-tools:
-  write: false
-  edit: false
-  bash: false
-permission:
-  edit: deny
-  bash:
-    "*": deny
----
-
-[Prompt com instruções detalhadas]
+```JSON
+  "agent": {
+    "nome do agente primário": {
+      "description": "Descrição do agente",
+      "mode": "primary",
+      "skill": [
+        "nome da skill.md"
+      ],
+      "prompt": "Prompt do seu agente",
+      "tools": {
+        "bash": true,
+        "glob": true,
+        "grep": true,
+        "read": true
+      }
+    }, "nome do sub-agente": {
+      "description": "Descrição do sub-agente",
+      "mode": "primary",
+      "skill": [
+        "nome da skill.md"
+      ],
+      "prompt": "Prompt do seu sub-agente",
+      "tools": {
+        "bash": true,
+        "glob": true,
+        "grep": true,
+        "read": true
+      }
+    }
+  }
 ```
 
 Para skills:
@@ -85,17 +100,6 @@ description: "O que a skill faz"
 ## When to use me
 - Quando usar
 ```
-
-## Critérios de Avaliação
-
-| Critério | Pontos |
-|----------|--------|
-| Arquivo existe | 2 |
-| Frontmatter válido | 2 |
-| Prompt funcional | 3 |
-| Problemas encontrados (qualidade) | 3 |
-
-Nota máxima por agente: 10/10
 
 ## Tempo
 
